@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель | Бар «Крылья»</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#111111',
+                            light: '#1f1f1f',
+                            accent: '#FF5722',
+                            hover: '#E64A19'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#0a0a0a] text-gray-300 antialiased flex h-screen overflow-hidden">
+
+    <aside class="w-64 bg-brand-dark border-r border-gray-800 flex flex-col transition-transform duration-300 md:relative absolute z-20 h-full transform -translate-x-full md:translate-x-0" id="sidebar">
+        <div class="h-20 flex items-center px-6 border-b border-gray-800 justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-fire text-brand-accent text-xl"></i>
+                <span class="font-bold text-xl text-white tracking-wider uppercase">Админка</span>
+            </div>
+            <button class="md:hidden text-gray-400 hover:text-white" onclick="toggleSidebar()">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+            <a href="#" class="flex items-center px-3 py-2.5 bg-brand-accent/10 text-brand-accent rounded-lg group">
+                <i class="fa-solid fa-burger w-6 text-center"></i>
+                <span class="ml-3 font-medium">Меню и Товары</span>
+            </a>
+            <a href="#" class="flex items-center px-3 py-2.5 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-colors group">
+                <i class="fa-solid fa-motorcycle w-6 text-center"></i>
+                <span class="ml-3 font-medium">Заказы</span>
+                <span class="ml-auto bg-brand-accent text-white text-xs font-bold px-2 py-0.5 rounded-full">3</span>
+            </a>
+            <a href="#" class="flex items-center px-3 py-2.5 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-colors group">
+                <i class="fa-solid fa-images w-6 text-center"></i>
+                <span class="ml-3 font-medium">Медиафайлы</span>
+            </a>
+            <a href="#" class="flex items-center px-3 py-2.5 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-colors group">
+                <i class="fa-solid fa-gear w-6 text-center"></i>
+                <span class="ml-3 font-medium">Настройки сайта</span>
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-gray-800">
+            <a href="#" class="flex items-center px-3 py-2 text-gray-400 hover:text-red-400 transition-colors">
+                <i class="fa-solid fa-right-from-bracket w-6 text-center"></i>
+                <span class="ml-3 font-medium">Выйти</span>
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden relative z-10">
+        <header class="h-20 bg-brand-dark/50 backdrop-blur-sm border-b border-gray-800 flex items-center justify-between px-6">
+            <div class="flex items-center">
+                <button class="md:hidden text-gray-400 hover:text-white mr-4" onclick="toggleSidebar()">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-xl font-bold text-white">Управление меню</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="index.html" target="_blank" class="text-sm text-gray-400 hover:text-white flex items-center transition-colors">
+                    <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i>
+                    На сайт
+                </a>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
+                <div class="relative w-full sm:w-64">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                    <input type="text" placeholder="Поиск блюда..." class="w-full bg-brand-dark border border-gray-700 text-white text-sm rounded-lg focus:ring-brand-accent focus:border-brand-accent block pl-10 p-2.5 placeholder-gray-500 outline-none transition-colors">
+                </div>
+                <button onclick="toggleModal('add-item-modal')" class="w-full sm:w-auto bg-brand-accent hover:bg-brand-hover text-white px-5 py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center">
+                    <i class="fa-solid fa-plus mr-2"></i>
+                    Добавить блюдо
+                </button>
+            </div>
+
+            <div class="bg-brand-dark rounded-xl border border-gray-800 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-400">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-800/50 border-b border-gray-800">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">Фото</th>
+                                <th scope="col" class="px-6 py-4">Название</th>
+                                <th scope="col" class="px-6 py-4">Категория</th>
+                                <th scope="col" class="px-6 py-4">Цена</th>
+                                <th scope="col" class="px-6 py-4">Статус</th>
+                                <th scope="col" class="px-6 py-4 text-right">Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-800">
+                            <tr class="hover:bg-gray-800/30 transition-colors">
+                                <td class="px-6 py-4">
+                                    <img src="https://images.unsplash.com/photo-1524114664604-cd8133cd67ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Крылья BBQ" class="w-12 h-12 rounded object-cover border border-gray-700">
+                                </td>
+                                <td class="px-6 py-4 font-medium text-white">Крылья BBQ (10 шт.)</td>
+                                <td class="px-6 py-4">Барное меню</td>
+                                <td class="px-6 py-4 font-bold text-white">450 ₽</td>
+                                <td class="px-6 py-4">
+                                    <span class="bg-green-500/10 text-green-500 text-xs font-medium px-2.5 py-1 rounded border border-green-500/20">Активен</span>
+                                </td>
+                                <td class="px-6 py-4 text-right space-x-3">
+                                    <button class="text-gray-400 hover:text-white transition-colors"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-gray-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            
+                            <tr class="hover:bg-gray-800/30 transition-colors">
+                                <td class="px-6 py-4">
+                                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Шашлык свинина" class="w-12 h-12 rounded object-cover border border-gray-700">
+                                </td>
+                                <td class="px-6 py-4 font-medium text-white">Шашлык (Шея свиная)</td>
+                                <td class="px-6 py-4">Доставка (Шашлык)</td>
+                                <td class="px-6 py-4 font-bold text-white">550 ₽</td>
+                                <td class="px-6 py-4">
+                                    <span class="bg-green-500/10 text-green-500 text-xs font-medium px-2.5 py-1 rounded border border-green-500/20">Активен</span>
+                                </td>
+                                <td class="px-6 py-4 text-right space-x-3">
+                                    <button class="text-gray-400 hover:text-white transition-colors"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-gray-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-800/30 transition-colors opacity-60">
+                                <td class="px-6 py-4">
+                                    <div class="w-12 h-12 rounded bg-gray-800 border border-gray-700 flex items-center justify-center">
+                                        <i class="fa-solid fa-image text-gray-600"></i>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 font-medium text-white">Сезонный бургер</td>
+                                <td class="px-6 py-4">Спецпредложение</td>
+                                <td class="px-6 py-4 font-bold text-white">600 ₽</td>
+                                <td class="px-6 py-4">
+                                    <span class="bg-gray-500/10 text-gray-400 text-xs font-medium px-2.5 py-1 rounded border border-gray-500/20">Скрыт</span>
+                                </td>
+                                <td class="px-6 py-4 text-right space-x-3">
+                                    <button class="text-gray-400 hover:text-white transition-colors"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-gray-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="add-item-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="toggleModal('add-item-modal')"></div>
+        
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-brand-dark rounded-2xl border border-gray-800 shadow-2xl overflow-hidden">
+            <div class="flex justify-between items-center p-5 border-b border-gray-800">
+                <h3 class="text-xl font-bold text-white">Добавить новое блюдо</h3>
+                <button onclick="toggleModal('add-item-modal')" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            
+            <form class="p-6 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-300">Название блюда</label>
+                            <input type="text" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-sm rounded-lg focus:ring-brand-accent focus:border-brand-accent block p-2.5 outline-none transition-colors" placeholder="Например: Крылья медовые">
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-300">Категория</label>
+                            <select class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-sm rounded-lg focus:ring-brand-accent focus:border-brand-accent block p-2.5 outline-none appearance-none">
+                                <option>Барное меню</option>
+                                <option>Доставка (Шашлык)</option>
+                                <option>Гарниры</option>
+                                <option>Напитки</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-300">Цена (₽)</label>
+                            <input type="number" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-sm rounded-lg focus:ring-brand-accent focus:border-brand-accent block p-2.5 outline-none transition-colors" placeholder="0">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-300">Фотография блюда</label>
+                        <div class="flex items-center justify-center w-full">
+                            <label class="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-700 border-dashed rounded-lg cursor-pointer bg-[#1a1a1a] hover:bg-gray-800 transition-colors">
+                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <i class="fa-solid fa-cloud-arrow-up text-3xl text-gray-500 mb-3"></i>
+                                    <p class="mb-2 text-sm text-gray-400"><span class="font-semibold text-brand-accent">Нажмите для загрузки</span> или перетащите</p>
+                                    <p class="text-xs text-gray-500">PNG, JPG или WEBP (макс. 2MB)</p>
+                                </div>
+                                <input type="file" class="hidden" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-300">Описание / Состав</label>
+                    <textarea rows="3" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-sm rounded-lg focus:ring-brand-accent focus:border-brand-accent block p-2.5 outline-none transition-colors resize-none" placeholder="Сочное мясо в фирменном маринаде..."></textarea>
+                </div>
+
+                <div class="flex items-center">
+                    <input id="is-active" type="checkbox" checked class="w-4 h-4 text-brand-accent bg-[#1a1a1a] border-gray-700 rounded focus:ring-brand-accent focus:ring-2 accent-brand-accent">
+                    <label for="is-active" class="ml-2 text-sm font-medium text-gray-300">Отображать на сайте (Активен)</label>
+                </div>
+
+                <div class="flex justify-end space-x-3 pt-4 border-t border-gray-800">
+                    <button type="button" onclick="toggleModal('add-item-modal')" class="px-5 py-2.5 text-sm font-medium text-gray-300 bg-transparent border border-gray-600 rounded-lg hover:bg-gray-800 hover:text-white transition-colors">Отмена</button>
+                    <button type="button" class="px-5 py-2.5 text-sm font-medium text-white bg-brand-accent rounded-lg hover:bg-brand-hover transition-colors">Сохранить блюдо</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Открытие/закрытие бокового меню на мобильных
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+
+        // Открытие/закрытие модальных окон
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // блокируем скролл фона
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>

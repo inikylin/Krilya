@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бар «Крылья» | Бар для своих | Доставка шашлыка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#111111',
+                            light: '#1f1f1f',
+                            accent: '#FF5722', // Аппетитный огненный оранжевый
+                            hover: '#E64A19'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-brand-dark text-gray-300 font-sans antialiased overflow-x-hidden">
+
+    <header class="fixed w-full top-0 z-50 bg-brand-dark/90 backdrop-blur-md border-b border-gray-800 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="#" class="flex items-center space-x-2">
+                    <i class="fa-solid fa-fire text-brand-accent text-2xl"></i>
+                    <span class="font-display font-black text-2xl text-white tracking-wider uppercase">Крылья</span>
+                </a>
+
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-sm font-medium hover:text-brand-accent transition-colors">О нас</a>
+                    <a href="#menu" class="text-sm font-medium hover:text-brand-accent transition-colors">Меню</a>
+                    <a href="#shashlik" class="text-sm font-medium text-brand-accent hover:text-brand-hover transition-colors">Доставка шашлыка</a>
+                    <a href="#contacts" class="text-sm font-medium hover:text-brand-accent transition-colors">Контакты</a>
+                </nav>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <button class="relative text-gray-300 hover:text-white transition-colors group">
+                        <i class="fa-solid fa-cart-shopping text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-accent text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center transform group-hover:scale-110 transition-transform">0</span>
+                    </button>
+                    <a href="#shashlik" class="bg-brand-accent hover:bg-brand-hover text-white px-6 py-2.5 rounded-full font-semibold transition-all shadow-[0_0_15px_rgba(255,87,34,0.3)] hover:shadow-[0_0_25px_rgba(255,87,34,0.5)]">
+                        Заказать доставку
+                    </a>
+                </div>
+
+                <div class="md:hidden flex items-center space-x-4">
+                    <button class="relative text-gray-300 hover:text-white">
+                        <i class="fa-solid fa-cart-shopping text-xl"></i>
+                        <span id="mobile-cart-count" class="absolute -top-2 -right-2 bg-brand-accent text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-light border-b border-gray-800">
+            <div class="px-4 pt-2 pb-6 space-y-1 flex flex-col">
+                <a href="#about" class="block px-3 py-3 rounded-md text-base font-medium hover:bg-gray-800 hover:text-white">О нас</a>
+                <a href="#menu" class="block px-3 py-3 rounded-md text-base font-medium hover:bg-gray-800 hover:text-white">Меню</a>
+                <a href="#shashlik" class="block px-3 py-3 rounded-md text-base font-medium text-brand-accent hover:bg-gray-800">Доставка шашлыка</a>
+                <a href="#contacts" class="block px-3 py-3 rounded-md text-base font-medium hover:bg-gray-800 hover:text-white">Контакты</a>
+                <a href="#shashlik" class="mt-4 block text-center bg-brand-accent text-white px-5 py-3 rounded-full font-semibold">Заказать доставку</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative h-screen min-h-[600px] flex items-center justify-center pt-20">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Мясо на гриле" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/80 via-brand-dark/60 to-brand-dark"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <p class="text-brand-accent font-bold tracking-widest uppercase mb-3 drop-shadow-md">Оренбург • ул. Беляевская, 19</p>
+            <h1 class="font-display text-5xl md:text-7xl font-black text-white tracking-tight mb-6 uppercase">
+                Крылья<br>
+                <span class="text-3xl md:text-5xl text-gray-300 font-bold mt-2 block">Бар для своих</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-medium">
+                Крафтовая атмосфера, сочные куриные крылья и настоящее мясо на гриле. Отдыхай с нами или заказывай доставку прямо домой.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#shashlik" class="w-full sm:w-auto bg-brand-accent hover:bg-brand-hover text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-[0_0_20px_rgba(255,87,34,0.4)] hover:shadow-[0_0_30px_rgba(255,87,34,0.6)]">
+                    Меню доставки
+                </a>
+                <a href="#menu" class="w-full sm:w-auto bg-transparent border-2 border-gray-500 hover:border-white text-white px-8 py-4 rounded-full font-bold text-lg transition-colors">
+                    Посмотреть меню бара
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1572656306390-40a9af38901b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Интерьер бара" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 border-4 border-brand-accent/20 rounded-2xl pointer-events-none"></div>
+                </div>
+                <div>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-6">Атмосфера, где все <span class="text-brand-accent">свои</span></h2>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                        Бар «Крылья» — это место, где правит вкус и отличная компания. Мы не пытаемся быть пафосными. Мы жарим отличные крылья, готовим идеальную картошку фри и наливаем то, что вы любите.
+                    </p>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        Вся наша еда готовится на открытом гриле. Дым, огонь и сочное мясо — вот наш главный секрет. А если вам не хочется выходить из дома — мы привезем горячий шашлык прямо к вашей двери.
+                    </p>
+                    <div class="flex items-center space-x-8">
+                        <div class="text-center">
+                            <span class="block font-display text-3xl font-black text-brand-accent">100%</span>
+                            <span class="text-sm text-gray-500 font-medium">Свежее мясо</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="block font-display text-3xl font-black text-brand-accent">Огонь</span>
+                            <span class="text-sm text-gray-500 font-medium">Открытый гриль</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-24 bg-brand-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-4">Хиты нашего бара</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">То, за чем к нам возвращаются снова и снова.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-brand-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all group">
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1524114664604-cd8133cd67ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Фирменные крылья" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-white font-display">Крылья BBQ (10 шт.)</h3>
+                            <span class="text-brand-accent font-bold text-xl">450 ₽</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6 min-h-[40px]">Сочные крылышки в фирменном соусе барбекю. Подаются с сельдереем и соусом блю-чиз.</p>
+                        <button onclick="addToCart()" class="w-full py-3 rounded-xl border border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-white transition-colors font-semibold flex justify-center items-center space-x-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>В корзину</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-brand-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all group">
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Острые крылья" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">Остро!</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-white font-display">Крылья Buffalo (10 шт.)</h3>
+                            <span class="text-brand-accent font-bold text-xl">470 ₽</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6 min-h-[40px]">Оригинальный острый рецепт. Для тех, кто любит погорячее.</p>
+                        <button onclick="addToCart()" class="w-full py-3 rounded-xl border border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-white transition-colors font-semibold flex justify-center items-center space-x-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>В корзину</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-brand-dark rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all group">
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1630431341973-02e1b662ce23?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Картофель фри" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-white font-display">Картофель Фри + Соус</h3>
+                            <span class="text-brand-accent font-bold text-xl">190 ₽</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6 min-h-[40px]">Хрустящая золотистая картошечка. Идеальное дополнение к мясу.</p>
+                        <button onclick="addToCart()" class="w-full py-3 rounded-xl border border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-white transition-colors font-semibold flex justify-center items-center space-x-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>В корзину</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="shashlik" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-brand-dark via-[#2a0e05] to-black"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-black/40 backdrop-blur-sm border border-brand-accent/20 rounded-3xl p-8 md:p-12 shadow-2xl">
+                
+                <div class="flex flex-col lg:flex-row gap-12 mb-16">
+                    <div class="lg:w-1/2">
+                        <div class="inline-block bg-brand-accent/10 border border-brand-accent/30 text-brand-accent px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider mb-4">Специальное предложение</div>
+                        <h2 class="font-display text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-tight">Доставка<br><span class="text-brand-accent">шашлыка</span></h2>
+                        <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                            Настоящий мангал, уголь и отборное мясо в правильном маринаде. Мы готовим шашлык так, как готовили бы для себя. Закажите прямо сейчас, и мы привезем его горячим!
+                        </p>
+                        <ul class="space-y-4 text-gray-400 mb-8">
+                            <li class="flex items-center"><i class="fa-solid fa-clock text-brand-accent w-6"></i> Доставка от 45 минут</li>
+                            <li class="flex items-center"><i class="fa-solid fa-temperature-arrow-up text-brand-accent w-6"></i> Термосумки (приедет горячим)</li>
+                            <li class="flex items-center"><i class="fa-solid fa-wallet text-brand-accent w-6"></i> Оплата картой или наличными при получении</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="bg-brand-dark/80 rounded-xl overflow-hidden border border-gray-800">
+                            <div class="h-40 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Шашлык из свинины" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-white font-bold mb-1">Шашлык (Шея свиная)</h4>
+                                <p class="text-gray-500 text-xs mb-3">Порция 200г. Лук, зелень, соус.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-brand-accent font-bold">550 ₽</span>
+                                    <button onclick="addToCart()" class="bg-white/10 hover:bg-brand-accent text-white rounded-lg px-3 py-1.5 transition-colors"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-brand-dark/80 rounded-xl overflow-hidden border border-gray-800">
+                            <div class="h-40 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Шашлык из курицы" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-white font-bold mb-1">Шашлык (Куриное филе)</h4>
+                                <p class="text-gray-500 text-xs mb-3">Порция 200г. Нежный маринад.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-brand-accent font-bold">420 ₽</span>
+                                    <button onclick="addToCart()" class="bg-white/10 hover:bg-brand-accent text-white rounded-lg px-3 py-1.5 transition-colors"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-brand-dark/80 rounded-xl overflow-hidden border border-gray-800">
+                            <div class="h-40 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1590556409410-67252063d8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Овощи гриль" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-white font-bold mb-1">Овощи на углях</h4>
+                                <p class="text-gray-500 text-xs mb-3">Шампиньоны, перец, кабачок.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-brand-accent font-bold">350 ₽</span>
+                                    <button onclick="addToCart()" class="bg-white/10 hover:bg-brand-accent text-white rounded-lg px-3 py-1.5 transition-colors"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-brand-dark/80 rounded-xl overflow-hidden border border-brand-accent/50">
+                            <div class="h-40 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1544025162-8111e4e3751a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Мясной сет" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-white font-bold mb-1">Сет «На компанию»</h4>
+                                <p class="text-gray-500 text-xs mb-3">1 кг мяса (свинина + курица + крылья).</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-brand-accent font-bold">1900 ₽</span>
+                                    <button onclick="addToCart()" class="bg-brand-accent hover:bg-brand-hover text-white rounded-lg px-3 py-1.5 transition-colors"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacts" class="bg-[#0a0a0a] pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <i class="fa-solid fa-fire text-brand-accent text-2xl"></i>
+                        <span class="font-display font-black text-2xl text-white tracking-wider uppercase">Крылья</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6">Бар для своих. Настоящее мясо на гриле, крафтовая атмосфера и быстрая доставка шашлыка в Оренбурге.</p>
+                    <a href="t.me/barkrylya56" target="_blank" class="inline-flex items-center space-x-2 text-white hover:text-[#229ED9] transition-colors">
+                        <i class="fa-brands fa-telegram text-2xl"></i>
+                        <span class="font-medium">Наш Telegram-канал</span>
+                    </a>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Контакты</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-3 text-gray-400">
+                            <i class="fa-solid fa-location-dot mt-1 text-brand-accent"></i>
+                            <span>г. Оренбург,<br>ул. Беляевская, 19</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-400">
+                            <i class="fa-solid fa-phone text-brand-accent"></i>
+                            <a href="tel:+70000000000" class="hover:text-white">+7 (000) 000-00-00</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Режим работы</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex justify-between"><span>Пн - Чт:</span> <span>12:00 - 23:00</span></li>
+                        <li class="flex justify-between"><span>Пт - Сб:</span> <span>12:00 - 02:00</span></li>
+                        <li class="flex justify-between"><span>Вс:</span> <span>12:00 - 23:00</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Мы на карте</h3>
+                    <div class="w-full h-32 bg-gray-800 rounded-lg flex items-center justify-center mb-4 overflow-hidden relative group">
+                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Карта" class="w-full h-full object-cover opacity-50 group-hover:opacity-30 transition-opacity">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-2">
+                            <i class="fa-solid fa-map-location-dot text-2xl text-brand-accent mb-2"></i>
+                            <span class="text-xs text-white font-bold">Открыть Яндекс.Карты</span>
+                        </div>
+                        <a href="https://yandex.com/profile/202015338743?lang=ru" target="_blank" class="absolute inset-0 z-10"></a>
+                    </div>
+                    
+                    <a href="https://yandex.com/profile/202015338743?lang=ru" target="_blank" class="flex items-center justify-between bg-[#FC3F1D]/10 text-white p-3 rounded-lg border border-[#FC3F1D]/30 hover:bg-[#FC3F1D]/20 transition-colors">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-[#FC3F1D] rounded text-white flex items-center justify-center font-bold text-xs">Я</div>
+                            <span class="font-medium text-sm">Оцените нас</span>
+                        </div>
+                        <div class="flex text-yellow-400 text-xs">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
+            <p>&copy; 2026 Бар «Крылья». Все права защищены.</p>
+            <p class="mt-2 md:mt-0">Разработано специально для своих.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Скрипт мобильного меню
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Закрытие мобильного меню при клике на ссылку
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Имитация добавления в корзину
+        let cartItemCount = 0;
+        function addToCart() {
+            cartItemCount++;
+            
+            // Обновляем счетчики
+            const desktopCount = document.getElementById('cart-count');
+            const mobileCount = document.getElementById('mobile-cart-count');
+            
+            desktopCount.innerText = cartItemCount;
+            mobileCount.innerText = cartItemCount;
+            
+            // Анимация
+            desktopCount.classList.add('scale-125');
+            setTimeout(() => desktopCount.classList.remove('scale-125'), 200);
+
+            // Опционально: можно показать мини-уведомление (toast)
+            // alert('Блюдо добавлено в корзину!');
+        }
+
+        // Изменение цвета хедера при скролле
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg', 'bg-brand-dark/95');
+                header.classList.remove('bg-brand-dark/90');
+            } else {
+                header.classList.remove('shadow-lg', 'bg-brand-dark/95');
+                header.classList.add('bg-brand-dark/90');
+            }
+        });
+    </script>
+</body>
+</html>
